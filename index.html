@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NexHub｜N站 全新的 AI 社区筹备中</title>
+  <meta name="description" content="NexHub（N站）全新的 AI 社区筹备中。连接创作者、开发者、玩家与探索者，一起发现下一代 AI 应用与内容。" />
+  <meta name="theme-color" content="#0B1020" />
+  <meta property="og:title" content="NexHub｜N站" />
+  <meta property="og:description" content="N站 全新的 AI 社区筹备中" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nexhub.do/" />
+  <style>
+    :root {
+      --bg: #070A12;
+      --bg-soft: #0B1020;
+      --card: rgba(255,255,255,.07);
+      --card-strong: rgba(255,255,255,.12);
+      --text: #F7F8FF;
+      --muted: rgba(247,248,255,.68);
+      --muted-2: rgba(247,248,255,.45);
+      --line: rgba(255,255,255,.13);
+      --accent: #7C5CFF;
+      --accent-2: #18D7FF;
+      --accent-3: #F7C948;
+      --radius: 28px;
+      --shadow: 0 24px 80px rgba(0,0,0,.38);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 14%, rgba(124,92,255,.38), transparent 32%),
+        radial-gradient(circle at 84% 18%, rgba(24,215,255,.22), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(247,201,72,.12), transparent 34%),
+        linear-gradient(180deg, var(--bg), #060812 58%, #03050B);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), transparent 75%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: relative;
+      z-index: 3;
+      padding: 28px 0 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(7,10,18,.58);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 10px 50px rgba(0,0,0,.22);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 12px 30px rgba(124,92,255,.35);
+    }
+
+    .nav span.status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #37F29A;
+      box-shadow: 0 0 22px rgba(55,242,154,.9);
+    }
+
+    main { position: relative; z-index: 2; }
+
+    .hero {
+      min-height: calc(100vh - 88px);
+      display: grid;
+      align-items: center;
+      padding: 76px 0 96px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      font-size: 14px;
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(58px, 10vw, 132px);
+      line-height: .86;
+      letter-spacing: -.085em;
+      font-weight: 900;
+    }
+
+    .gradient-text {
+      display: inline-block;
+      background: linear-gradient(100deg, #fff 8%, #B7AEFF 46%, #7EEBFF 86%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tagline {
+      margin: 28px 0 0;
+      max-width: 700px;
+      color: var(--text);
+      font-size: clamp(28px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -.05em;
+      font-weight: 800;
+    }
+
+    .sub {
+      margin: 22px 0 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 18px 45px rgba(124,92,255,.32);
+    }
+    .btn.secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,.055);
+      color: var(--text);
+    }
+
+    .panel {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.045)),
+        rgba(255,255,255,.045);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(24px);
+    }
+
+    .orb {
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 999px;
+      filter: blur(2px);
+      opacity: .9;
+    }
+    .orb.one { right: -52px; top: -42px; background: radial-gradient(circle, rgba(24,215,255,.88), transparent 68%); }
+    .orb.two { left: -46px; bottom: -62px; background: radial-gradient(circle, rgba(124,92,255,.92), transparent 70%); }
+
+    .mock-card {
+      position: absolute;
+      inset: 34px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 24px;
+      background: rgba(4,6,14,.64);
+      overflow: hidden;
+    }
+
+    .mock-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .chips { display: flex; gap: 7px; }
+    .chip { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.22); }
+    .chip:nth-child(1) { background: #FF6B6B; }
+    .chip:nth-child(2) { background: #FFD166; }
+    .chip:nth-child(3) { background: #37F29A; }
+
+    .mock-body { padding: 22px; display: grid; gap: 15px; align-content: center; }
+    .post {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.065);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .post b { display: block; margin-bottom: 7px; }
+    .post p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px; }
+    .post.highlight { background: linear-gradient(135deg, rgba(124,92,255,.24), rgba(24,215,255,.12)); }
+
+    .mock-foot {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .metric { padding: 16px; text-align: center; }
+    .metric strong { display:block; font-size: 22px; }
+    .metric small { color: var(--muted-2); }
+
+    .section { padding: 34px 0 98px; }
+    .section-head { max-width: 720px; margin-bottom: 28px; }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -.06em;
+    }
+    .section-head p { color: var(--muted); font-size: 17px; line-height: 1.75; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      padding: 26px;
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: var(--card);
+      backdrop-filter: blur(18px);
+    }
+    .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      background: var(--card-strong);
+      font-size: 21px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 22px; letter-spacing: -.03em; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.68; }
+
+    .launch {
+      margin-bottom: 70px;
+      padding: 34px;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(124,92,255,.22), rgba(24,215,255,.10));
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    .launch h2 { margin: 0; font-size: clamp(30px,4vw,52px); letter-spacing: -.055em; }
+    .launch p { margin: 12px 0 0; color: var(--muted); line-height: 1.7; }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      padding: 28px 0 42px;
+      color: var(--muted-2);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 920px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .panel { min-height: 440px; }
+      .cards { grid-template-columns: 1fr; }
+      .launch { grid-template-columns: 1fr; }
+      .nav span.status { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 24px, 1120px); }
+      header { padding-top: 14px; }
+      .hero { padding: 52px 0 72px; }
+      h1 { font-size: clamp(56px, 18vw, 92px); }
+      .tagline { font-size: 30px; }
+      .sub { font-size: 16px; }
+      .panel { min-height: 390px; }
+      .mock-card { inset: 16px; }
+      .mock-foot { grid-template-columns: 1fr; }
+      .metric { padding: 10px; }
+      .actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="NexHub 首页">
+        <span class="mark">N</span>
+        <span>NexHub</span>
+      </a>
+      <span class="status"><i class="dot"></i>N站筹备中</span>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell" data-od-id="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow" data-od-id="eyebrow"><span class="dot"></span> AI Community · Coming Soon</div>
+          <h1 data-od-id="headline"><span class="gradient-text">NexHub</span></h1>
+          <p class="tagline" data-od-id="tagline">N站，全新的 AI 社区筹备中。</p>
+          <p class="sub" data-od-id="subhead">这里将聚合 AI 工具、创作者作品、模型玩法、教程经验与社区讨论。为每一个探索下一代生产力的人，准备一个更轻、更酷、更开放的连接入口。</p>
+          <div class="actions" data-od-id="actions">
+            <a class="btn primary" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">申请早期加入</a>
+            <a class="btn secondary" href="#vision">了解计划</a>
+          </div>
+        </div>
+
+        <div class="panel" aria-label="NexHub 社区预览" data-od-id="preview-panel">
+          <div class="orb one"></div>
+          <div class="orb two"></div>
+          <div class="mock-card">
+            <div class="mock-top">
+              <div class="chips"><span class="chip"></span><span class="chip"></span><span class="chip"></span></div>
+              <span>nexhub.do / beta</span>
+            </div>
+            <div class="mock-body">
+              <article class="post highlight">
+                <b>今日精选 · AI 工作流</b>
+                <p>发现、收藏并复用来自社区的高质量提示词、自动化链路与模型组合。</p>
+              </article>
+              <article class="post">
+                <b>创作者广场</b>
+                <p>展示你的 AI 应用、角色卡、Agent、插件与内容实验。</p>
+              </article>
+              <article class="post">
+                <b>共建路线图</b>
+                <p>从封闭内测开始，逐步开放身份、作品、声誉与协作系统。</p>
+              </article>
+            </div>
+            <div class="mock-foot">
+              <div class="metric"><strong>AI</strong><small>主题社区</small></div>
+              <div class="metric"><strong>Beta</strong><small>即将开放</small></div>
+              <div class="metric"><strong>N站</strong><small>全新入口</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" class="section shell" data-od-id="vision">
+      <div class="section-head">
+        <h2>为 AI 时代重新设计社区入口。</h2>
+        <p>NexHub 不只是资讯站，也不只是工具导航。我们希望它成为 AI 爱好者、开发者和内容创作者共同生长的实验场。</p>
+      </div>
+      <div class="cards">
+        <article class="card" data-od-id="feature-discovery">
+          <div class="icon">✦</div>
+          <h3>发现新工具</h3>
+          <p>聚合优质 AI 应用、模型服务、Agent 项目与真实使用经验，减少信息噪音。</p>
+        </article>
+        <article class="card" data-od-id="feature-community">
+          <div class="icon">⌁</div>
+          <h3>连接同路人</h3>
+          <p>围绕提示词、自动化、创作、开发与商业化，建立更高密度的交流场域。</p>
+        </article>
+        <article class="card" data-od-id="feature-build">
+          <div class="icon">⬡</div>
+          <h3>共建 N 站</h3>
+          <p>从早期成员开始收集反馈，让社区形态、栏目和规则与用户一起迭代。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell" data-od-id="launch">
+      <div class="launch">
+        <div>
+          <h2>内测名单即将开启。</h2>
+          <p>如果你正在做 AI 产品、内容、Agent、自动化或模型玩法，欢迎先留下联系。NexHub 会优先邀请早期共建者。</p>
+        </div>
+        <a class="btn primary" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">联系 NexHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span>© 2026 NexHub / N站</span>
+      <span>全新的 AI 社区筹备中</span>
+    </div>
+  </footer>
+</body>
+</html>
