@@ -4,41 +4,53 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NexHub｜N站 全新的 AI 社区筹备中</title>
-  <meta name="description" content="NexHub（N站）全新的 AI 社区筹备中。连接创作者、开发者、玩家与探索者，一起发现下一代 AI 应用与内容。" />
-  <meta name="theme-color" content="#0B1020" />
+  <meta name="description" content="NexHub（N站）全新的 AI 社区筹备中。一个为 AI 创作者、开发者和探索者准备的下一代社区入口。" />
+  <meta name="theme-color" content="#f4f1ea" />
   <meta property="og:title" content="NexHub｜N站" />
   <meta property="og:description" content="N站 全新的 AI 社区筹备中" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nexhub.do/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #070A12;
-      --bg-soft: #0B1020;
-      --card: rgba(255,255,255,.07);
-      --card-strong: rgba(255,255,255,.12);
-      --text: #F7F8FF;
-      --muted: rgba(247,248,255,.68);
-      --muted-2: rgba(247,248,255,.45);
-      --line: rgba(255,255,255,.13);
-      --accent: #7C5CFF;
-      --accent-2: #18D7FF;
-      --accent-3: #F7C948;
-      --radius: 28px;
-      --shadow: 0 24px 80px rgba(0,0,0,.38);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --canvas: #f4f1ea;
+      --canvas-2: #ece7dd;
+      --ink: #171717;
+      --ink-2: #3d3a35;
+      --muted: #756f65;
+      --muted-2: #9a9388;
+      --line: rgba(23, 23, 23, .08);
+      --line-strong: rgba(23, 23, 23, .12);
+      --surface: rgba(255, 255, 255, .62);
+      --surface-strong: rgba(255, 255, 255, .86);
+      --dark: #121212;
+      --dark-2: #1d1b18;
+      --purple: #735cff;
+      --blue: #10b7ff;
+      --green: #3ddc97;
+      --amber: #f2b94b;
+      --radius-xl: 40px;
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --ease: cubic-bezier(.32,.72,0,1);
+      --shadow-soft: 0 30px 80px -42px rgba(23,23,23,.35);
+      --shadow-card: 0 24px 54px -34px rgba(23,23,23,.30);
+      font-family: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
-      color: var(--text);
+      min-height: 100dvh;
+      color: var(--ink);
       background:
-        radial-gradient(circle at 16% 14%, rgba(124,92,255,.38), transparent 32%),
-        radial-gradient(circle at 84% 18%, rgba(24,215,255,.22), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(247,201,72,.12), transparent 34%),
-        linear-gradient(180deg, var(--bg), #060812 58%, #03050B);
+        radial-gradient(circle at 12% 8%, rgba(115,92,255,.18), transparent 32%),
+        radial-gradient(circle at 88% 12%, rgba(16,183,255,.13), transparent 34%),
+        radial-gradient(circle at 45% 92%, rgba(242,185,75,.16), transparent 34%),
+        linear-gradient(180deg, var(--canvas), var(--canvas-2));
       overflow-x: hidden;
     }
 
@@ -48,87 +60,130 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), transparent 75%);
+        linear-gradient(rgba(23,23,23,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,23,23,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent 62%);
+      z-index: 0;
+    }
+
+    .mesh {
+      position: fixed;
+      width: 680px;
+      height: 680px;
+      left: 50%;
+      top: -260px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, rgba(115,92,255,.22), rgba(16,183,255,.18), rgba(61,220,151,.13), rgba(242,185,75,.16), rgba(115,92,255,.22));
+      filter: blur(70px);
+      opacity: .72;
+      pointer-events: none;
+      animation: drift 28s var(--ease) infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes drift {
+      from { transform: translateX(-50%) translate3d(-4%, 0, 0) scale(1); }
+      to { transform: translateX(-50%) translate3d(5%, 5%, 0) scale(1.08); }
     }
 
     a { color: inherit; text-decoration: none; }
+    .shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
 
-    .shell {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: relative;
-      z-index: 3;
-      padding: 28px 0 0;
+    .nav-wrap {
+      position: sticky;
+      top: 22px;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      padding-top: 22px;
+      pointer-events: none;
     }
 
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(7,10,18,.58);
-      backdrop-filter: blur(22px);
-      box-shadow: 0 10px 50px rgba(0,0,0,.22);
-    }
-
-    .brand {
+      pointer-events: auto;
       display: flex;
       align-items: center;
       gap: 12px;
+      padding: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.62);
+      background: rgba(250,248,243,.72);
+      box-shadow: 0 18px 48px -30px rgba(23,23,23,.55), inset 0 1px 0 rgba(255,255,255,.75);
+      backdrop-filter: blur(28px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 14px 7px 8px;
+      border-radius: 999px;
       font-weight: 800;
-      letter-spacing: -.03em;
+      letter-spacing: -.04em;
     }
 
     .mark {
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
       display: grid;
       place-items: center;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(135deg, var(--ink), #39342f 42%, var(--purple));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 12px 26px -14px rgba(23,23,23,.75);
       font-weight: 900;
-      box-shadow: 0 12px 30px rgba(124,92,255,.35);
     }
 
-    .nav span.status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      padding: 11px 13px;
+      border-radius: 999px;
       color: var(--muted);
       font-size: 14px;
+      font-weight: 650;
+      transition: background 500ms var(--ease), color 500ms var(--ease), transform 500ms var(--ease);
     }
+    .nav-links a:hover { background: rgba(23,23,23,.055); color: var(--ink); transform: translateY(-1px); }
 
-    .dot {
-      width: 8px;
-      height: 8px;
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 7px 7px 15px;
       border-radius: 999px;
-      background: #37F29A;
-      box-shadow: 0 0 22px rgba(55,242,154,.9);
+      color: #fff;
+      background: var(--ink);
+      font-size: 14px;
+      font-weight: 760;
+      box-shadow: 0 16px 32px -22px rgba(23,23,23,.8);
+      transition: transform 700ms var(--ease);
     }
-
-    main { position: relative; z-index: 2; }
+    .nav-cta:hover { transform: translateY(-1px); }
+    .arrow-dot {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--ink);
+      background: #fff;
+      transition: transform 700ms var(--ease);
+    }
+    .nav-cta:hover .arrow-dot, .btn.primary:hover .arrow-dot { transform: translate(1px,-1px) scale(1.06); }
 
     .hero {
-      min-height: calc(100vh - 88px);
+      min-height: calc(100dvh - 92px);
       display: grid;
       align-items: center;
-      padding: 76px 0 96px;
+      padding: 46px 0 58px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
-      gap: 54px;
+      grid-template-columns: minmax(0, 1fr) 440px;
+      gap: 58px;
       align-items: center;
     }
 
@@ -136,286 +191,366 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 9px 13px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255,255,255,.05);
-      font-size: 14px;
       margin-bottom: 26px;
+      padding: 9px 13px;
+      border: 1px solid rgba(23,23,23,.075);
+      border-radius: 999px;
+      background: rgba(255,255,255,.52);
+      color: var(--muted);
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.66);
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 7px rgba(61,220,151,.15), 0 0 26px rgba(61,220,151,.75);
     }
 
     h1 {
       margin: 0;
-      max-width: 780px;
-      font-size: clamp(58px, 10vw, 132px);
-      line-height: .86;
-      letter-spacing: -.085em;
+      max-width: 790px;
+      font-size: clamp(66px, 10vw, 132px);
+      line-height: .88;
+      letter-spacing: -.075em;
       font-weight: 900;
     }
 
-    .gradient-text {
+    .hero h1 span {
       display: inline-block;
-      background: linear-gradient(100deg, #fff 8%, #B7AEFF 46%, #7EEBFF 86%);
+      background: linear-gradient(105deg, #161616 4%, #5c47e8 52%, #10a5ef 92%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .tagline {
-      margin: 28px 0 0;
-      max-width: 700px;
-      color: var(--text);
-      font-size: clamp(28px, 4vw, 54px);
-      line-height: 1.08;
-      letter-spacing: -.05em;
-      font-weight: 800;
+    .lede {
+      margin: 25px 0 0;
+      max-width: 54ch;
+      color: var(--ink-2);
+      font-size: clamp(22px, 3.1vw, 38px);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+      font-weight: 760;
     }
 
     .sub {
       margin: 22px 0 0;
-      max-width: 620px;
+      max-width: 62ch;
       color: var(--muted);
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.8;
     }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 34px;
-    }
-
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 34px; }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      min-height: 52px;
-      padding: 0 22px;
+      gap: 12px;
+      min-height: 56px;
+      padding: 8px 8px 8px 22px;
       border-radius: 999px;
       font-weight: 800;
-      border: 1px solid transparent;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      transition: transform 700ms var(--ease), background 700ms var(--ease), color 700ms var(--ease);
+    }
+    .btn:active { transform: scale(.985); }
+    .btn.primary { background: var(--ink); color: #fff; box-shadow: 0 22px 44px -30px rgba(23,23,23,.8); }
+    .btn.secondary { padding-right: 22px; border: 1px solid var(--line); background: rgba(255,255,255,.48); color: var(--ink-2); }
+    .btn.secondary:hover { background: rgba(255,255,255,.76); transform: translateY(-1px); }
+
+    .hero-card-outer, .bezel {
+      padding: 7px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,.78);
+      background: linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.30));
+      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,.95);
     }
 
-    .btn:hover { transform: translateY(-2px); }
-    .btn.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      box-shadow: 0 18px 45px rgba(124,92,255,.32);
-    }
-    .btn.secondary {
-      border-color: var(--line);
-      background: rgba(255,255,255,.055);
-      color: var(--text);
-    }
-
-    .panel {
+    .hero-card {
       position: relative;
-      min-height: 520px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.045)),
-        rgba(255,255,255,.045);
-      box-shadow: var(--shadow);
+      min-height: 590px;
       overflow: hidden;
-      backdrop-filter: blur(24px);
+      border-radius: calc(var(--radius-xl) - 8px);
+      border: 1px solid rgba(23,23,23,.055);
+      background: linear-gradient(180deg, #181612, #27231f);
+      color: #fff;
     }
 
-    .orb {
+    .hero-card::before {
+      content: "";
       position: absolute;
-      width: 230px;
-      height: 230px;
-      border-radius: 999px;
-      filter: blur(2px);
-      opacity: .9;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 72% 16%, rgba(16,183,255,.38), transparent 26%),
+        radial-gradient(circle at 18% 78%, rgba(115,92,255,.52), transparent 28%),
+        radial-gradient(circle at 72% 84%, rgba(242,185,75,.22), transparent 24%);
+      filter: blur(10px);
     }
-    .orb.one { right: -52px; top: -42px; background: radial-gradient(circle, rgba(24,215,255,.88), transparent 68%); }
-    .orb.two { left: -46px; bottom: -62px; background: radial-gradient(circle, rgba(124,92,255,.92), transparent 70%); }
 
-    .mock-card {
+    .terminal {
       position: absolute;
-      inset: 34px;
+      inset: 22px;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 24px;
-      background: rgba(4,6,14,.64);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 30px;
+      background: rgba(13,13,13,.60);
+      backdrop-filter: blur(24px);
       overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
     }
 
-    .mock-top {
+    .terminal-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.58);
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .traffic { display: flex; gap: 7px; }
+    .traffic span { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,.18); }
+    .traffic span:nth-child(1) { background: #ff6b6b; }
+    .traffic span:nth-child(2) { background: #ffd166; }
+    .traffic span:nth-child(3) { background: #3ddc97; }
+
+    .feed { display: grid; gap: 14px; align-content: center; padding: 22px; }
+    .feed-card {
       padding: 18px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.07);
+      transition: transform 700ms var(--ease), background 700ms var(--ease);
+    }
+    .feed-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.10); }
+    .feed-card.wide { background: linear-gradient(135deg, rgba(115,92,255,.28), rgba(16,183,255,.13)); }
+    .feed-card small { color: rgba(255,255,255,.48); font-family: "Geist Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+    .feed-card b { display: block; margin: 7px 0 6px; font-size: 17px; letter-spacing: -.025em; }
+    .feed-card p { margin: 0; color: rgba(255,255,255,.64); line-height: 1.58; font-size: 14px; }
+
+    .terminal-foot {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .metric { padding: 17px 10px; text-align: center; }
+    .metric strong { display: block; font-size: 24px; letter-spacing: -.04em; }
+    .metric span { color: rgba(255,255,255,.48); font-size: 12px; }
+
+    .section { padding: 104px 0; }
+    .section-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 38px; align-items: end; margin-bottom: 28px; }
+    .tag {
+      display: inline-flex;
+      width: max-content;
+      margin-bottom: 18px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
       color: var(--muted);
+      background: rgba(255,255,255,.42);
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    h2 { margin: 0; font-size: clamp(42px, 6vw, 84px); line-height: .96; letter-spacing: -.065em; font-weight: 880; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.78; max-width: 58ch; }
+
+    .bento {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+    }
+    .bento-side { display: grid; gap: 18px; }
+    .card-inner {
+      height: 100%;
+      min-height: 286px;
+      border-radius: calc(var(--radius-lg) - 7px);
+      border: 1px solid rgba(23,23,23,.06);
+      background: rgba(255,255,255,.68);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.86);
+      padding: 28px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 700ms var(--ease), background 700ms var(--ease);
+    }
+    .bezel:hover .card-inner { transform: translateY(-3px); background: rgba(255,255,255,.82); }
+    .card-inner.dark { color: #fff; background: linear-gradient(135deg, #161616, #24201b); }
+    .card-inner.dark p, .card-inner.dark .mini { color: rgba(255,255,255,.62); }
+    .mini { color: var(--muted); font-family: "Geist Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+    .card-inner h3 { margin: 48px 0 12px; font-size: clamp(25px, 3vw, 38px); line-height: 1.02; letter-spacing: -.055em; }
+    .card-inner p { margin: 0; color: var(--muted); line-height: 1.7; max-width: 54ch; }
+    .glow-pill {
+      position: absolute;
+      right: 28px;
+      top: 28px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(115,92,255,.12);
+      color: #4d39d4;
+      font-weight: 800;
       font-size: 13px;
     }
-
-    .chips { display: flex; gap: 7px; }
-    .chip { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.22); }
-    .chip:nth-child(1) { background: #FF6B6B; }
-    .chip:nth-child(2) { background: #FFD166; }
-    .chip:nth-child(3) { background: #37F29A; }
-
-    .mock-body { padding: 22px; display: grid; gap: 15px; align-content: center; }
-    .post {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.065);
-      border: 1px solid rgba(255,255,255,.1);
+    .signal {
+      position: absolute;
+      right: -70px;
+      bottom: -90px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,183,255,.28), transparent 64%);
     }
-    .post b { display: block; margin-bottom: 7px; }
-    .post p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px; }
-    .post.highlight { background: linear-gradient(135deg, rgba(124,92,255,.24), rgba(24,215,255,.12)); }
 
-    .mock-foot {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      border-top: 1px solid rgba(255,255,255,.1);
+    .marquee {
+      overflow: hidden;
+      margin: 58px 0 0;
+      padding: 16px 0;
+      border-block: 1px solid rgba(23,23,23,.065);
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
     }
-    .metric { padding: 16px; text-align: center; }
-    .metric strong { display:block; font-size: 22px; }
-    .metric small { color: var(--muted-2); }
-
-    .section { padding: 34px 0 98px; }
-    .section-head { max-width: 720px; margin-bottom: 28px; }
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(34px, 5vw, 64px);
-      line-height: 1;
-      letter-spacing: -.06em;
+    .track { display: flex; gap: 14px; width: max-content; animation: marquee 30s linear infinite; }
+    .marquee:hover .track { animation-play-state: paused; }
+    .logo-pill {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(255,255,255,.42);
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
     }
-    .section-head p { color: var(--muted); font-size: 17px; line-height: 1.75; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
 
-    .cards {
+    .roadmap {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
+      margin-top: 34px;
     }
-    .card {
-      padding: 26px;
-      min-height: 230px;
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      background: var(--card);
-      backdrop-filter: blur(18px);
-    }
-    .icon {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 30px;
-      border-radius: 15px;
-      background: var(--card-strong);
-      font-size: 21px;
-    }
-    .card h3 { margin: 0 0 10px; font-size: 22px; letter-spacing: -.03em; }
-    .card p { margin: 0; color: var(--muted); line-height: 1.68; }
+    .step { padding: 7px; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,.70); background: rgba(255,255,255,.36); box-shadow: var(--shadow-card); }
+    .step-core { min-height: 230px; border-radius: calc(var(--radius-lg) - 7px); border: 1px solid rgba(23,23,23,.055); background: rgba(255,255,255,.62); padding: 24px; }
+    .num { width: 38px; height: 38px; display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--ink); font-family:"Geist Mono"; font-weight:800; font-size:12px; }
+    .step h3 { margin: 44px 0 10px; font-size: 24px; letter-spacing: -.04em; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.7; }
 
-    .launch {
-      margin-bottom: 70px;
-      padding: 34px;
-      border-radius: 34px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: linear-gradient(135deg, rgba(124,92,255,.22), rgba(24,215,255,.10));
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: center;
+    .closing {
+      padding: 7px;
+      border-radius: 44px;
+      border: 1px solid rgba(255,255,255,.72);
+      background: rgba(255,255,255,.38);
+      box-shadow: var(--shadow-soft);
     }
-    .launch h2 { margin: 0; font-size: clamp(30px,4vw,52px); letter-spacing: -.055em; }
-    .launch p { margin: 12px 0 0; color: var(--muted); line-height: 1.7; }
-
-    footer {
+    .closing-core {
       position: relative;
-      z-index: 2;
-      padding: 28px 0 42px;
-      color: var(--muted-2);
-      border-top: 1px solid rgba(255,255,255,.08);
+      overflow: hidden;
+      border-radius: 36px;
+      padding: clamp(34px, 7vw, 72px);
+      color: #fff;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(115,92,255,.42), transparent 28%),
+        radial-gradient(circle at 16% 90%, rgba(16,183,255,.22), transparent 30%),
+        linear-gradient(135deg, #121212, #211d18);
     }
-    .footer-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .closing-core h2 { max-width: 820px; }
+    .closing-core p { max-width: 58ch; color: rgba(255,255,255,.62); line-height: 1.78; font-size: 17px; }
 
-    @media (max-width: 920px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .panel { min-height: 440px; }
-      .cards { grid-template-columns: 1fr; }
-      .launch { grid-template-columns: 1fr; }
-      .nav span.status { display: none; }
+    footer { padding: 30px 0 44px; color: var(--muted); font-family: "Geist Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: .04em; }
+    .footer-row { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--line); }
+
+    [data-reveal] { opacity: 0; transform: translateY(16px); filter: blur(8px); transition: opacity 900ms var(--ease), transform 900ms var(--ease), filter 900ms var(--ease); }
+    [data-reveal].in { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+    @media (max-width: 980px) {
+      .hero-grid, .section-head, .bento { grid-template-columns: 1fr; }
+      .hero { padding-top: 64px; }
+      .hero-card { min-height: 480px; }
+      .roadmap { grid-template-columns: 1fr; }
     }
-
-    @media (max-width: 520px) {
-      .shell { width: min(100% - 24px, 1120px); }
-      header { padding-top: 14px; }
-      .hero { padding: 52px 0 72px; }
-      h1 { font-size: clamp(56px, 18vw, 92px); }
-      .tagline { font-size: 30px; }
-      .sub { font-size: 16px; }
-      .panel { min-height: 390px; }
-      .mock-card { inset: 16px; }
-      .mock-foot { grid-template-columns: 1fr; }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 24px, 1160px); }
+      .nav { width: calc(100% - 24px); justify-content: space-between; }
+      .nav-links { display: none; }
+      .nav-cta { font-size: 0; padding-left: 7px; }
+      h1 { font-size: clamp(58px, 18vw, 92px); }
+      .lede { font-size: 27px; }
+      .hero-card { min-height: 430px; }
+      .terminal { inset: 14px; border-radius: 24px; }
+      .terminal-foot { grid-template-columns: 1fr; }
       .metric { padding: 10px; }
-      .actions .btn { width: 100%; }
+      .section { padding: 78px 0; }
+      .actions .btn { width: 100%; justify-content: space-between; }
     }
   </style>
 </head>
 <body>
-  <header class="shell">
+  <div class="mesh" aria-hidden="true"></div>
+
+  <header class="nav-wrap">
     <nav class="nav" aria-label="主导航">
-      <a class="brand" href="#top" aria-label="NexHub 首页">
-        <span class="mark">N</span>
-        <span>NexHub</span>
-      </a>
-      <span class="status"><i class="dot"></i>N站筹备中</span>
+      <a class="brand" href="#top" aria-label="NexHub 首页"><span class="mark">N</span><span>NexHub</span></a>
+      <div class="nav-links" aria-label="页面导航">
+        <a href="#vision">愿景</a>
+        <a href="#build">共建</a>
+        <a href="#roadmap">路线图</a>
+      </div>
+      <a class="nav-cta" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">早期加入 <span class="arrow-dot">↗</span></a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero shell" data-od-id="hero">
       <div class="hero-grid">
-        <div>
-          <div class="eyebrow" data-od-id="eyebrow"><span class="dot"></span> AI Community · Coming Soon</div>
-          <h1 data-od-id="headline"><span class="gradient-text">NexHub</span></h1>
-          <p class="tagline" data-od-id="tagline">N站，全新的 AI 社区筹备中。</p>
-          <p class="sub" data-od-id="subhead">这里将聚合 AI 工具、创作者作品、模型玩法、教程经验与社区讨论。为每一个探索下一代生产力的人，准备一个更轻、更酷、更开放的连接入口。</p>
-          <div class="actions" data-od-id="actions">
-            <a class="btn primary" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">申请早期加入</a>
-            <a class="btn secondary" href="#vision">了解计划</a>
+        <div data-reveal>
+          <div class="eyebrow"><span class="pulse"></span> AI COMMUNITY · COMING SOON</div>
+          <h1><span>NexHub</span></h1>
+          <p class="lede">N站，全新的 AI 社区筹备中。</p>
+          <p class="sub">连接 AI 创作者、开发者、工具玩家和探索者。我们正在准备一个更轻、更酷、更高密度的社区入口，用来发现作品、交换经验、共建下一代 AI 生态。</p>
+          <div class="actions">
+            <a class="btn primary" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">申请早期加入 <span class="arrow-dot">↗</span></a>
+            <a class="btn secondary" href="#vision">先看看计划</a>
           </div>
         </div>
 
-        <div class="panel" aria-label="NexHub 社区预览" data-od-id="preview-panel">
-          <div class="orb one"></div>
-          <div class="orb two"></div>
-          <div class="mock-card">
-            <div class="mock-top">
-              <div class="chips"><span class="chip"></span><span class="chip"></span><span class="chip"></span></div>
-              <span>nexhub.do / beta</span>
-            </div>
-            <div class="mock-body">
-              <article class="post highlight">
-                <b>今日精选 · AI 工作流</b>
-                <p>发现、收藏并复用来自社区的高质量提示词、自动化链路与模型组合。</p>
-              </article>
-              <article class="post">
-                <b>创作者广场</b>
-                <p>展示你的 AI 应用、角色卡、Agent、插件与内容实验。</p>
-              </article>
-              <article class="post">
-                <b>共建路线图</b>
-                <p>从封闭内测开始，逐步开放身份、作品、声誉与协作系统。</p>
-              </article>
-            </div>
-            <div class="mock-foot">
-              <div class="metric"><strong>AI</strong><small>主题社区</small></div>
-              <div class="metric"><strong>Beta</strong><small>即将开放</small></div>
-              <div class="metric"><strong>N站</strong><small>全新入口</small></div>
+        <div class="hero-card-outer" data-reveal>
+          <div class="hero-card" aria-label="NexHub 社区界面预览">
+            <div class="terminal">
+              <div class="terminal-top"><div class="traffic"><span></span><span></span><span></span></div><span>NEXHUB / PRIVATE BETA</span></div>
+              <div class="feed">
+                <article class="feed-card wide">
+                  <small>Featured workflow</small>
+                  <b>把灵感、Prompt、Agent 和成品串成一个作品页</b>
+                  <p>社区不只收藏链接，而是沉淀可复用的 AI 创作链路。</p>
+                </article>
+                <article class="feed-card">
+                  <small>Builder room</small>
+                  <b>开发者、创作者与工具玩家同场交流</b>
+                  <p>围绕模型、自动化、内容和商业化展开高密度讨论。</p>
+                </article>
+                <article class="feed-card">
+                  <small>Launch soon</small>
+                  <b>从早期共建者开始开放</b>
+                  <p>先邀请真正愿意试用、反馈和建设社区的人。</p>
+                </article>
+              </div>
+              <div class="terminal-foot">
+                <div class="metric"><strong>AI</strong><span>主题社区</span></div>
+                <div class="metric"><strong>Beta</strong><span>即将开放</span></div>
+                <div class="metric"><strong>N站</strong><span>新入口</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -423,45 +558,91 @@
     </section>
 
     <section id="vision" class="section shell" data-od-id="vision">
-      <div class="section-head">
-        <h2>为 AI 时代重新设计社区入口。</h2>
-        <p>NexHub 不只是资讯站，也不只是工具导航。我们希望它成为 AI 爱好者、开发者和内容创作者共同生长的实验场。</p>
+      <div class="section-head" data-reveal>
+        <div><span class="tag">WHY NEXHUB</span><h2>AI 时代需要新的社区纹理。</h2></div>
+        <p>传统论坛太重，工具导航太浅，信息流又太快。NexHub 想把「发现、交流、展示、共建」压缩进一个更漂亮也更有效的空间。</p>
       </div>
-      <div class="cards">
-        <article class="card" data-od-id="feature-discovery">
-          <div class="icon">✦</div>
-          <h3>发现新工具</h3>
-          <p>聚合优质 AI 应用、模型服务、Agent 项目与真实使用经验，减少信息噪音。</p>
+
+      <div class="bento" data-reveal>
+        <article class="bezel">
+          <div class="card-inner dark">
+            <span class="mini">Community OS</span>
+            <span class="glow-pill">N站内测</span>
+            <span class="signal"></span>
+            <h3>围绕作品和工作流，而不是噪音。</h3>
+            <p>从 AI 工具、角色卡、Prompt、Agent 到自动化脚本，每个内容都可以沉淀上下文、作者、版本和讨论。</p>
+          </div>
         </article>
-        <article class="card" data-od-id="feature-community">
-          <div class="icon">⌁</div>
-          <h3>连接同路人</h3>
-          <p>围绕提示词、自动化、创作、开发与商业化，建立更高密度的交流场域。</p>
-        </article>
-        <article class="card" data-od-id="feature-build">
-          <div class="icon">⬡</div>
-          <h3>共建 N 站</h3>
-          <p>从早期成员开始收集反馈，让社区形态、栏目和规则与用户一起迭代。</p>
-        </article>
+        <div class="bento-side">
+          <article class="bezel">
+            <div class="card-inner">
+              <span class="mini">Discovery</span>
+              <h3>发现真正有用的 AI 玩法。</h3>
+              <p>精选工具、教程、案例和作品，让新手少踩坑，让高手更快找到同类。</p>
+            </div>
+          </article>
+          <article class="bezel">
+            <div class="card-inner">
+              <span class="mini">Builder network</span>
+              <h3>让共建者先聚在一起。</h3>
+              <p>早期阶段优先邀请 AI 产品、内容和自动化方向的实践者参与打磨。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="marquee" aria-label="NexHub 关注方向" data-reveal>
+        <div class="track">
+          <span class="logo-pill">PROMPTS</span><span class="logo-pill">AGENTS</span><span class="logo-pill">WORKFLOWS</span><span class="logo-pill">AI TOOLS</span><span class="logo-pill">CREATORS</span><span class="logo-pill">MODELS</span><span class="logo-pill">AUTOMATION</span><span class="logo-pill">COMMUNITY</span>
+          <span class="logo-pill">PROMPTS</span><span class="logo-pill">AGENTS</span><span class="logo-pill">WORKFLOWS</span><span class="logo-pill">AI TOOLS</span><span class="logo-pill">CREATORS</span><span class="logo-pill">MODELS</span><span class="logo-pill">AUTOMATION</span><span class="logo-pill">COMMUNITY</span>
+        </div>
       </div>
     </section>
 
-    <section class="shell" data-od-id="launch">
-      <div class="launch">
-        <div>
-          <h2>内测名单即将开启。</h2>
-          <p>如果你正在做 AI 产品、内容、Agent、自动化或模型玩法，欢迎先留下联系。NexHub 会优先邀请早期共建者。</p>
+    <section id="roadmap" class="section shell" data-od-id="roadmap">
+      <div class="section-head" data-reveal>
+        <div><span class="tag">ROADMAP</span><h2>先小范围内测，再逐步开放。</h2></div>
+        <p>我们会用更克制的节奏启动 N站：先验证社区质量，再扩大功能和成员规模。</p>
+      </div>
+      <div class="roadmap" data-reveal>
+        <article class="step"><div class="step-core"><div class="num">01</div><h3>早期名单</h3><p>收集愿意参与反馈的 AI 创作者、开发者和工具玩家。</p></div></article>
+        <article class="step"><div class="step-core"><div class="num">02</div><h3>社区骨架</h3><p>上线作品展示、主题讨论、精选推荐与基础身份系统。</p></div></article>
+        <article class="step"><div class="step-core"><div class="num">03</div><h3>共建生态</h3><p>围绕 Agent、工作流、资源库和创作者主页逐步扩展。</p></div></article>
+      </div>
+    </section>
+
+    <section id="build" class="section shell" data-od-id="cta">
+      <div class="closing" data-reveal>
+        <div class="closing-core">
+          <span class="tag" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.62);border-color:rgba(255,255,255,.12)">EARLY ACCESS</span>
+          <h2>如果你也在认真玩 AI，先上车。</h2>
+          <p>NexHub 还在筹备中，但我们已经开始寻找第一批共建者。留下联系，一起把 N站做成值得每天打开的 AI 社区。</p>
+          <div class="actions">
+            <a class="btn primary" style="background:#fff;color:#151515" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">联系 NexHub <span class="arrow-dot" style="background:#151515;color:#fff">↗</span></a>
+            <a class="btn secondary" style="color:#fff;border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.08)" href="#top">回到顶部</a>
+          </div>
         </div>
-        <a class="btn primary" href="mailto:hello@nexhub.do?subject=NexHub%20Early%20Access">联系 NexHub</a>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="shell footer-row">
-      <span>© 2026 NexHub / N站</span>
-      <span>全新的 AI 社区筹备中</span>
+  <footer class="shell">
+    <div class="footer-row">
+      <span>© 2026 NEXHUB / N站</span>
+      <span>ALL NEW AI COMMUNITY · PREPARING</span>
     </div>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
